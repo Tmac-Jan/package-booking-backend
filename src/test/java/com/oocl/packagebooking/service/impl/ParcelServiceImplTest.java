@@ -1,15 +1,44 @@
 package com.oocl.packagebooking.service.impl;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+import com.oocl.packagebooking.entity.Parcel;
+import com.oocl.packagebooking.enums.ParcelStatus;
+import com.oocl.packagebooking.repository.ParcelRepositroy;
+import com.oocl.packagebooking.service.ParcelService;
+import java.util.Date;
+import org.junit.Assert;
+import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.util.ReflectionTestUtils;
+import org.springframework.test.web.servlet.MockMvc;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-@AutoConfigureMockMvc
-class ParcelServiceImplTest {
 
+public class ParcelServiceImplTest {
+
+  @Autowired
+  private MockMvc mockMvc;
+
+
+
+  private ParcelServiceImpl parcelService = new ParcelServiceImpl();
+
+
+  @Test
+  public void should_return_parcel_when_call_addParcel_with_correct_parcel() {
+    ParcelRepositroy parcelRepositroy = Mockito.mock(ParcelRepositroy.class);
+    Parcel parcelActual = new Parcel("0001", "zhangrun", "13192266960",
+        ParcelStatus.NOTAPPOINT.getStatus(), new Date(), 3);
+    Parcel parcelExpected = new Parcel(1, "0001", "zhangrun", "13192266960",
+        ParcelStatus.NOTAPPOINT.getStatus(), new Date(), 3);
+    ReflectionTestUtils.setField(parcelService,ParcelServiceImpl.class,"parcelRepositroy",parcelRepositroy,ParcelRepositroy.class);
+    Mockito.when((
+        parcelRepositroy.save(Mockito.any(Parcel.class))
+    )).thenReturn(parcelExpected);
+    Parcel result = parcelService.addParcel(parcelActual);
+    Assert.assertEquals(result.getId(), parcelExpected.getId());
+  }
 }
