@@ -21,6 +21,7 @@ public class Parcel {
 
     private Date  appointTime;
 
+    private Integer weight;
   public Parcel(String orderNumer, String customerName, String customerPhone,
       Integer status, Date appointTime) {
     this.orderNumer = orderNumer;
