@@ -24,6 +24,11 @@ public class ParcelServiceImpl implements ParcelService {
 
   @Override
   public Parcel setParcelStatus(Integer id, Integer status) {
+    Optional<Parcel> parcel  = parcelRepositroy.findById(id);
+    if (parcel!=null){
+      parcel.get().setStatus(status);
+      return parcelRepositroy.save(parcel.get());
+    }else
     return null;
   }
 

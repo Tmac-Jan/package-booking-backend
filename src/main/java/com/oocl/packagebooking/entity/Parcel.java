@@ -1,5 +1,6 @@
 package com.oocl.packagebooking.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.oocl.packagebooking.Utils.Date2LongSerializer;
 import java.util.Date;
@@ -23,8 +24,8 @@ public class Parcel {
     private Integer status;
 
   @DateTimeFormat(pattern = "yyyy-MM-dd")
-  @JsonSerialize(using = Date2LongSerializer.class)
-    private Date  appointTime;
+  @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="Asia/Shanghai")
+  private Date  appointTime;
 
     private Integer weight;
 

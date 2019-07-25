@@ -16,6 +16,6 @@ spring:
     console:
       enabled: true
   jackson:
-    default-property-inclusion: non_null
+#    default-property-inclusion: non_null
 server:
   port: 8089

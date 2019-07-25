@@ -55,7 +55,20 @@ public class ParcelController {
       return (ResponseEntity) ResponseEntity.status(HttpStatus.BAD_REQUEST);
     }
   }
-
+  @PutMapping(value = "/parcels/{id}")
+  public ResponseEntity modifyParcelStatusByCustomer(@PathVariable Integer id,
+      @RequestBody Parcel parcel) {
+    if (id != null) {
+      Parcel parcelGet = parcelService.setParcelStatus(id, parcel.getStatus());
+      if (parcelGet != null) {
+        return ResponseEntity.ok(parcelGet);
+      } else {
+        return (ResponseEntity) ResponseEntity.status(HttpStatus.BAD_REQUEST);
+      }
+    } else {
+      return (ResponseEntity) ResponseEntity.status(HttpStatus.BAD_REQUEST);
+    }
+  }
 //  @PutMapping(value = "/parcels/{id}")
 //  public ResponseEntity appointParcel(@PathVariable Integer id,
 //      @RequestBody Parcel parcel) {

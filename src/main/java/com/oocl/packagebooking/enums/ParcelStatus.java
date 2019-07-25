@@ -19,6 +19,6 @@ public enum ParcelStatus implements StatusEnum {
 
   @Override
   public Integer getStatus() {
-    return null;
+    return this.status;
   }
 }
