@@ -1,6 +1,7 @@
 package com.oocl.packagebooking.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -41,6 +42,23 @@ public  class ParcelControllerTest {
         .contentType(MediaType.APPLICATION_JSON_UTF8)
         .content(MAPPER.writeValueAsString(parcel)
         ))
+        .andExpect(status().isOk());
+  }
+  @Test
+  public void shoule_return_parcel_when_call_appoint_parcell_API() throws Exception {
+    ObjectMapper MAPPER = new ObjectMapper();
+    Parcel parcel = new Parcel("0001","zhangrun","13192266960",
+        ParcelStatus.NOTAPPOINT.getStatus(),new Date(),3);
+    Parcel parcelExpected = new Parcel("0001","zhangrun","13192266960",
+        ParcelStatus.APPOINT.getStatus(),new Date(),3);
+    Mockito.when(
+        parcelService.appointParcel(
+            (Integer) Mockito.any()
+        )).thenReturn(parcelExpected);
+    mockMvc.perform(put("/parcels/{id}",1)
+//        .contentType(MediaType.APPLICATION_JSON_UTF8)
+//        .content(MAPPER.writeValueAsString(parcel)
+        )
         .andExpect(status().isOk());
   }
 }
