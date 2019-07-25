@@ -43,6 +43,12 @@ public class ParelRepositroyTest {
   public void should_return_parcel_list_when_call_findAllByStatusOfAppoint(){
     List<Parcel> parcelsActual = parelRepositroy.findAllByStatus(ParcelStatus.APPOINT.getStatus());
     Assert.assertEquals(1,parcelsActual.size());
+  }
 
+  @Test
+  public  void should_return_parcel_list_when_call_findByOrderNumber_API(){
+    List<Parcel> parcels = parelRepositroy.findAllByOrderNumber("0003");
+    Parcel result = parcels.get(0);
+    Assert.assertEquals("0003",result.getOrderNumber());
   }
 }
