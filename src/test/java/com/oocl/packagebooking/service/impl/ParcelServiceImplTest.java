@@ -3,22 +3,15 @@ package com.oocl.packagebooking.service.impl;
 import com.oocl.packagebooking.entity.Parcel;
 import com.oocl.packagebooking.enums.ParcelStatus;
 import com.oocl.packagebooking.repository.ParcelRepositroy;
-import com.oocl.packagebooking.service.ParcelService;
 import java.util.Arrays;
 import java.util.Date;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
-
-
 public class ParcelServiceImplTest {
 
   @Autowired
@@ -37,7 +30,6 @@ public class ParcelServiceImplTest {
 
   @Test
   public void should_return_parcel_when_call_addParcel_with_correct_parcel() {
-
     Parcel parcelActual = new Parcel("0001", "zhangrun", "13192266960",
         ParcelStatus.NOTAPPOINT.getStatus(), new Date(), 3);
     Parcel parcelExpected = new Parcel(1, "0001", "zhangrun", "13192266960",
@@ -85,7 +77,6 @@ public class ParcelServiceImplTest {
     Mockito.when((
         parcelRepositroy.save(parcelActual)
     )).thenReturn(parcelExpected1);
-
     Assert.assertEquals(ParcelStatus.SUCCESS.getStatus(),parcelExpected1.getStatus());
   }
 }

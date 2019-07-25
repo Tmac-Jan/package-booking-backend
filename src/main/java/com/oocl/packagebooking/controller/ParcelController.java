@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,43 +45,21 @@ public class ParcelController {
   @PutMapping(value = "/parcels/{id}")
   public ResponseEntity modifyParcelStatus(@PathVariable Integer id,
       @RequestBody Parcel parcel) {
-    if (id != null) {
-      Parcel parcelGet = parcelService.setParcelStatus(id, parcel.getStatus());
+    Parcel parcelGet = parcelService.setParcelStatus(id, parcel);
       if (parcelGet != null) {
         return ResponseEntity.ok(parcelGet);
       } else {
         return (ResponseEntity) ResponseEntity.status(HttpStatus.BAD_REQUEST);
       }
-    } else {
-      return (ResponseEntity) ResponseEntity.status(HttpStatus.BAD_REQUEST);
-    }
   }
-  @PutMapping(value = "/parcels/{id}")
-  public ResponseEntity modifyParcelStatusByCustomer(@PathVariable Integer id,
+  @PutMapping(value = "/parcels")
+  public ResponseEntity modifyParcelStatusWithoutId(
       @RequestBody Parcel parcel) {
-    if (id != null) {
-      Parcel parcelGet = parcelService.setParcelStatus(id, parcel.getStatus());
-      if (parcelGet != null) {
-        return ResponseEntity.ok(parcelGet);
-      } else {
-        return (ResponseEntity) ResponseEntity.status(HttpStatus.BAD_REQUEST);
-      }
+    Parcel parcelGet = parcelService.setParcelStatus(null, parcel);
+    if (parcelGet != null) {
+      return ResponseEntity.ok(parcelGet);
     } else {
       return (ResponseEntity) ResponseEntity.status(HttpStatus.BAD_REQUEST);
     }
   }
-//  @PutMapping(value = "/parcels/{id}")
-//  public ResponseEntity appointParcel(@PathVariable Integer id,
-//      @RequestBody Parcel parcel) {
-//    if (id != null) {
-//      Parcel parcelGet = parcelService.setParcelStatus(id,parcel.getStatus());
-//      if (parcelGet != null) {
-//        return ResponseEntity.ok(parcelGet);
-//      } else {
-//        return (ResponseEntity) ResponseEntity.status(HttpStatus.BAD_REQUEST);
-//      }
-//    } else {
-//      return (ResponseEntity) ResponseEntity.status(HttpStatus.BAD_REQUEST);
-//    }
-//  }
 }

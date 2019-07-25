@@ -1,9 +1,8 @@
 package com.oocl.packagebooking.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.oocl.packagebooking.Utils.Date2LongSerializer;
 import java.util.Date;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -15,6 +14,7 @@ public class Parcel {
     @GeneratedValue
     private Integer id;
 
+    @Column(unique = true)
     private String orderNumber;
 
     private String customerName;
@@ -23,7 +23,7 @@ public class Parcel {
 
     private Integer status;
 
-  @DateTimeFormat(pattern = "yyyy-MM-dd")
+  @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
   @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="Asia/Shanghai")
   private Date  appointTime;
 

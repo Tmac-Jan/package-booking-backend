@@ -6,8 +6,6 @@ public enum ParcelStatus implements StatusEnum {
   APPOINT(1, "已预约"),
   SUCCESS(2, "已取件"),
   ;
-
-
   private Integer status;
 
   private String message;
