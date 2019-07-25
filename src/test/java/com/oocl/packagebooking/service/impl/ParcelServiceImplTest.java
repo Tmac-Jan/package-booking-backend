@@ -83,9 +83,9 @@ public class ParcelServiceImplTest {
         .setField(parcelService, ParcelServiceImpl.class, "parcelRepositroy", parcelRepositroy,
             ParcelRepositroy.class);
     Mockito.when((
-        parcelRepositroy.save(Mockito.any(Parcel.class))
+        parcelRepositroy.save(parcelActual)
     )).thenReturn(parcelExpected1);
-    
+
     Assert.assertEquals(ParcelStatus.SUCCESS.getStatus(),parcelExpected1.getStatus());
   }
 }
