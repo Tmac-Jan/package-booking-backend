@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Parcel {
@@ -13,7 +14,7 @@ public class Parcel {
     @GeneratedValue
     private Integer id;
 
-    private String orderNumer;
+    private String orderNumber;
 
     private String customerName;
 
@@ -21,6 +22,7 @@ public class Parcel {
 
     private Integer status;
 
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
   @JsonSerialize(using = Date2LongSerializer.class)
     private Date  appointTime;
 
@@ -29,7 +31,7 @@ public class Parcel {
   public Parcel(Integer id, String orderNumer, String customerName, String customerPhone,
       Integer status, Date appointTime, Integer weight) {
     this.id = id;
-    this.orderNumer = orderNumer;
+    this.orderNumber = orderNumer;
     this.customerName = customerName;
     this.customerPhone = customerPhone;
     this.status = status;
@@ -39,7 +41,7 @@ public class Parcel {
 
   public Parcel(String orderNumer, String customerName, String customerPhone,
       Integer status, Date appointTime, Integer weight) {
-    this.orderNumer = orderNumer;
+    this.orderNumber = orderNumer;
     this.customerName = customerName;
     this.customerPhone = customerPhone;
     this.status = status;
@@ -66,12 +68,12 @@ public class Parcel {
     this.id = id;
   }
 
-  public String getOrderNumer() {
-    return orderNumer;
+  public String getOrderNumber() {
+    return orderNumber;
   }
 
-  public void setOrderNumer(String orderNumer) {
-    this.orderNumer = orderNumer;
+  public void setOrderNumber(String orderNumber) {
+    this.orderNumber = orderNumber;
   }
 
   public String getCustomerName() {
