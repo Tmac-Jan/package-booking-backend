@@ -5,27 +5,27 @@ import com.oocl.packagebooking.enums.ParcelStatus;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-
+@DataJpaTest
 @RunWith(SpringRunner.class)
-@SpringBootTest
-@AutoConfigureMockMvc
-class ParelRepositroyTest {
+public class ParelRepositroyTest {
+
   @Autowired
-  private MockMvc mockMvc;
-
-
+  private TestEntityManager entityManager;
   @Autowired
   private ParcelRepositroy parelRepositroy;
-  @Before void setUp(){
+  @Before public void setUp(){
     List<Parcel> parcels = new ArrayList<Parcel>(){
       {
         add(new Parcel("0001","zhangrun","13192266960",
@@ -35,12 +35,14 @@ class ParelRepositroyTest {
         add(new Parcel("0003","barry","13192266960",
             ParcelStatus.APPOINT.getStatus(),new Date(),3));
       }
+
     };
+    entityManager.persist(parcels.get(2));
+  }
+  @Test
+  public void should_return_parcel_list_when_call_findAllByStatusOfAppoint(){
+    List<Parcel> parcelsActual = parelRepositroy.findAllByStatus(ParcelStatus.APPOINT.getStatus());
+    Assert.assertEquals(1,parcelsActual.size());
 
   }
-//  @Test
-//  public void shoule_return_parcel_list_when_call_findAllByStatusOfAppoint(){
-//    List<Parcel> parcelsActual = parelRepositroy.findAllbyStatus()
-//
-//  }
 }
