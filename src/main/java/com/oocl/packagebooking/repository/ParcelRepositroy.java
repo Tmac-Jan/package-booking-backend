@@ -4,8 +4,9 @@ import com.oocl.packagebooking.entity.Parcel;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ParcelRepositroy extends JpaRepository<Parcel,Integer> {
+public interface ParcelRepositroy extends JpaRepository<Parcel, Integer> {
 
- List<Parcel> findAllByStatus(Integer status);
+  List<Parcel> findAllByStatus(Integer status);
 
+  List<Parcel> findAllByOrderNumber(String orderNumber);
 }
