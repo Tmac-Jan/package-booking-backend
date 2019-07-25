@@ -1,5 +1,7 @@
 package com.oocl.packagebooking.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.oocl.packagebooking.Utils.Date2LongSerializer;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,6 +21,7 @@ public class Parcel {
 
     private Integer status;
 
+  @JsonSerialize(using = Date2LongSerializer.class)
     private Date  appointTime;
 
     private Integer weight;
@@ -45,6 +48,14 @@ public class Parcel {
   }
 
   public Parcel() {
+  }
+
+  public Integer getWeight() {
+    return weight;
+  }
+
+  public void setWeight(Integer weight) {
+    this.weight = weight;
   }
 
   public Integer getId() {

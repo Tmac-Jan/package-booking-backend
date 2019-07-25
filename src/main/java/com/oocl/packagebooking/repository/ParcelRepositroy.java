@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ParcelRepositroy extends JpaRepository<Parcel,Integer> {
 
-//  List<Parcel> findAllbyStatus(Integer status);
+ List<Parcel> findAllByStatus(Integer status);
 
 }
