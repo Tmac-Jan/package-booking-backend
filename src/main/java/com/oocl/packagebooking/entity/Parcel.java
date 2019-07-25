@@ -22,13 +22,26 @@ public class Parcel {
     private Date  appointTime;
 
     private Integer weight;
-  public Parcel(String orderNumer, String customerName, String customerPhone,
-      Integer status, Date appointTime) {
+
+  public Parcel(Integer id, String orderNumer, String customerName, String customerPhone,
+      Integer status, Date appointTime, Integer weight) {
+    this.id = id;
     this.orderNumer = orderNumer;
     this.customerName = customerName;
     this.customerPhone = customerPhone;
     this.status = status;
     this.appointTime = appointTime;
+    this.weight = weight;
+  }
+
+  public Parcel(String orderNumer, String customerName, String customerPhone,
+      Integer status, Date appointTime, Integer weight) {
+    this.orderNumer = orderNumer;
+    this.customerName = customerName;
+    this.customerPhone = customerPhone;
+    this.status = status;
+    this.appointTime = appointTime;
+    this.weight = weight;
   }
 
   public Parcel() {
